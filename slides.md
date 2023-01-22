@@ -167,6 +167,10 @@ And this world is made of state machines.
 
 ---
 
+TODO: JSON example for the Promise machine
+
+---
+
 # Set up XState
 
 <br>
@@ -203,3 +207,59 @@ function Component() {
 ---
 
 # Reimplement the logic
+
+---
+
+# Pros and cons of XState
+
+<br>
+
+<div class="grid grid-cols-2">
+<div>
+
+## Pros
+
+- Application logic is centralized and kept apart from implementation details
+- Application logic is easier to understand, and even more with visual tools
+- The logic is predictable; only what has been defined in the machine can occur
+- Non-developers can understand the code – and even participate to it
+
+</div>
+
+<div>
+
+## Cons
+
+- Learning curve with statecharts, and with XState API
+
+</div>
+</div>
+
+---
+
+# Other things XState can do
+
+- Libraries for all front-end frameworks: @xstate/react, @xstate/vue, @xstate/svelte, @xstate/solid (coming soon)
+- [@xstate/inspect](https://stately.ai/docs/tools/inspector): Inspect a machine in real-time and interact with it
+- [@xstate/test](https://stately.ai/docs/xstate/packages/xstate-test): Generate tests from a state machine (aka. Model-Based Testing)
+- [Power a CLI built with Node.js](https://github.com/mattpocock/matt-cli/blob/13953df17e05213bff1f69fb1e9e416a3996171a/src/pr.ts)
+- [In a Node.js server](https://youtu.be/qqyQGEjWSAw)
+- [Power a Temporal Worker](https://github.com/Devessier/temporal-electronic-signature)
+- Soon... with other languages than JavaScript
+
+---
+
+# To learn more
+
+- https://stately.ai
+- https://statecharts.dev
+
+---
+
+# Thank you!
+
+- <mdi-github /> [Devessier](https://github.com/Devessier)
+- <mdi-link /> [baptiste.devessier.fr](https://baptiste.devessier.fr)
+- <mdi-twitter /> [BDevessier](https://twitter.com/BDevessier)
+- Code: https://github.com/Devessier/xstate-talk-demo
+<!-- - Slides: [temporal-electronic-signature-talk.netlify.app](https://temporal-electronic-signature-talk.netlify.app/1) -->
