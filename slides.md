@@ -10,6 +10,12 @@ layout: intro
 
 Is it a new version of X-Files or X-Men? 🤔
 
+<div class="absolute bottom-10">
+  <span class="font-700">
+    Baptiste Devessier - 2023
+  </span>
+</div>
+
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
@@ -18,7 +24,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 # Structure of a usual React page
 
-Example: https://xstate-talk-todo-app.netlify.app
+[Todo list app](https://xstate-talk-todo-app.netlify.app)
 
 - Data fetching when page is first rendered
 - Using booleans to keep track of *states*
@@ -165,9 +171,7 @@ And this world is made of state machines.
 - In the frontend, it can be used with any framework, and even with no framework at all
 - [Stately](https://stately.ai) develops visual tools for XState
 
----
-
-TODO: JSON example for the Promise machine
+[Fetching machine example](https://stately.ai/registry/editor/6fa98cfb-fe39-4479-a6a6-2db09dc872d1?machineId=d530e75e-35d7-4e78-a67f-56f6b64b6eab)
 
 ---
 
