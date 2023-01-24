@@ -22,119 +22,31 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 ---
 
-# Structure of a usual React page
+# Today's demo
 
-[Todo list app](https://xstate-talk-todo-app.netlify.app)
+<a href="https://xstate-talk-todo-app.netlify.app" target="_blank">
 
-- Data fetching when page is first rendered
-- Using booleans to keep track of *states*
-- Defensive code to prevent behaviors based on booleans
-- Difficult to spot the most important lines of code
+![](/Screenshot%202023-01-23%20at%2011-05-42%20https%20__xstate-talk-todo-app.netlify.app.png)
 
-<!-- Open VSCode with code for /without-xstate page -->
+</a>
 
 ---
 
-## Data fetching
+# Structure of the app
 
-<br>
+- Data fetching (as a side effect) when page is first rendered
+- Defensive code to prevent behaviors, based on booleans: Open the form if a condition is met when clicking on *Add a todo* button
+- Booleans need to be synced from multiple places (error prone)
+- Sometimes, a behavior is so complex to implement that the reason behind it fades out
+  - Conditionally calling a debounced version of `synchronizeTodoList`
 
-```tsx
-const [todos, setTodos] = useState<TodoItem[]>([]);
-const [hasFetchedInitialTodos, setHasFetchedInitialTodos] = useState(false);
+<!--
+Open VSCode with code for /without-xstate page
 
-useEffect(() => {
-  fetchInitialTodos()
-    .then((initialTodos) => {
-      setTodos(initialTodos);
-    })
-    .catch(() => {
-      setTodos([]);
-    })
-    .finally(() => {
-      setHasFetchedInitialTodos(true);
-    });
-}, []);
-```
-
----
-
-## Defensive code based on current state
-
-<br>
-
-```tsx
-const [hasFetchedInitialTodos, setHasFetchedInitialTodos] = useState(false);
-const [isTodoCreationFormOpen, setIsTodoCreationFormOpen] = useState(false);
-
-const isLoadingInitialTodos = hasFetchedInitialTodos === false;
-
-function handleOpenTodoCreation() {
-  if (isLoadingInitialTodos === true) {
-    return;
-  }
-
-  setIsTodoCreationFormOpen(true);
-}
-```
-
----
-
-## Different kinds of code are mixed
-
-Code to keep track of the current state is mixed with code actually starting things.
-
-```tsx
-function handleSaveTodo(newTodo: string) {
-  setTodos((todoList) => [
-    ...todoList,
-    {
-      id: generateId(),
-      label: newTodo,
-      checked: false,
-    },
-  ]);
-
-  setIsTodoCreationFormOpen(false);
-
-  askForSynchronization();
-}
-```
-
----
-
-## Calling conditionnally a debounced function is... hard
-
-```tsx
-const onSynchronize = useEvent(() => {
-  return synchronizeTodoList(todos);
-});
-
-const debouncedSynchronization = useMemo(
-  () =>
-    debounce(async () => {
-      try {
-        setIsSynchronizing(true);
-
-        await onSynchronize();
-      } catch (message) {
-        return console.error(message);
-      } finally {
-        setIsSynchronizing(false);
-      }
-    }, 1_000),
-  [onSynchronize]
-);
-
-const askForSynchronization = useCallback(() => {
-  // Do not call the call the function while a synchronization is already occuring.
-  if (isSynchronizing === true) {
-    return;
-  }
-
-  debouncedSynchronization();
-}, [debouncedSynchronization, isSynchronizing]);
-```
+- Date fetching
+- Prevent from opening the form during initial loading
+- Need to 
+-->
 
 ---
 layout: intro
@@ -142,7 +54,7 @@ layout: intro
 
 # It's time for a better world.
 
-And this world is made of state machines.
+A world made of state machines.
 
 ---
 
@@ -159,7 +71,11 @@ And this world is made of state machines.
 
 # State machine to fetch data
 
-<img src="/CleanShot 2023-01-22 at 16.33.05@2x.png" />
+<a href="https://stately.ai/registry/editor/6fa98cfb-fe39-4479-a6a6-2db09dc872d1?machineId=d530e75e-35d7-4e78-a67f-56f6b64b6eab" target="_blank">
+
+![](/CleanShot%202023-01-22%20at%2016.33.05%402x.png)
+
+</a>
 
 ---
 
@@ -171,46 +87,23 @@ And this world is made of state machines.
 - In the frontend, it can be used with any framework, and even with no framework at all
 - [Stately](https://stately.ai) develops visual tools for XState
 
-[Fetching machine example](https://stately.ai/registry/editor/6fa98cfb-fe39-4479-a6a6-2db09dc872d1?machineId=d530e75e-35d7-4e78-a67f-56f6b64b6eab)
+---
+
+# Set up XState in the page
+
+- `createMachine` to define a machine
+- `useMachine` to interpret a machine and get it's current state
+- `state.matches('...')` to know if the machine is in a particular state
+- `send(...)` to send an event to the machine
 
 ---
 
-# Set up XState
+# Reimplement with XState
 
-<br>
-
-## Install xstate and @xstate/react
-
-```bash
-npm install xstate @xstate/react
-```
-
-<br>
-
-## Create a machine
-
-```ts
-import { createMachine } from 'xstate'
-
-const todoMachine = createMachine()
-```
-
-<br>
-
-## Use the machine in a React component
-
-```ts
-import { useMachine } from '@xstate/react'
-import { todoMachine } from '~/machines/todo'
-
-function Component() {
-  const [state, send] = useMachine(todoMachine)
-}
-```
-
----
-
-# Reimplement the logic
+- Logic is centralized in the machine
+- Event handlers only forward events – with a payload or not
+- View *derives* state from the current state of the machine
+- Context is used to store infinite data, like a list of todos
 
 ---
 
@@ -226,7 +119,7 @@ function Component() {
 - Application logic is centralized and kept apart from implementation details
 - Application logic is easier to understand, and even more with visual tools
 - The logic is predictable; only what has been defined in the machine can occur
-- Non-developers can understand the code – and even participate to it
+- Non-developers can understand the code – and even participate to it!
 
 </div>
 
@@ -235,6 +128,7 @@ function Component() {
 ## Cons
 
 - Learning curve with statecharts, and with XState API
+- Not a paradigm wildly adopted in front-end development; might take some efforts to convert a team to it
 
 </div>
 </div>
@@ -248,7 +142,7 @@ function Component() {
 - [@xstate/test](https://stately.ai/docs/xstate/packages/xstate-test): Generate tests from a state machine (aka. Model-Based Testing)
 - [Power a CLI built with Node.js](https://github.com/mattpocock/matt-cli/blob/13953df17e05213bff1f69fb1e9e416a3996171a/src/pr.ts)
 - [In a Node.js server](https://youtu.be/qqyQGEjWSAw)
-- [Power a Temporal Worker](https://github.com/Devessier/temporal-electronic-signature)
+- [Power a Temporal Workflow](https://github.com/Devessier/temporal-electronic-signature)
 - Soon... with other languages than JavaScript
 
 ---
