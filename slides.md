@@ -156,6 +156,8 @@ A world made of state machines.
 
 # Thank you!
 
+Thank you Cédric and Loïck for inviting me.
+
 - <mdi-github /> [Devessier](https://github.com/Devessier)
 - <mdi-link /> [baptiste.devessier.fr](https://baptiste.devessier.fr)
 - <mdi-twitter /> [BDevessier](https://twitter.com/BDevessier)
