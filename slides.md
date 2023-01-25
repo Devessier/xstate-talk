@@ -89,15 +89,6 @@ A world made of state machines.
 
 ---
 
-# Set up XState in the page
-
-- `createMachine` to define a machine
-- `useMachine` to interpret a machine and get it's current state
-- `state.matches('...')` to know if the machine is in a particular state
-- `send(...)` to send an event to the machine
-
----
-
 # Reimplement with XState
 
 - Logic is centralized in the machine
@@ -162,6 +153,7 @@ Thank you Cédric and Loïck for inviting me.
 
 <div>
 
+- Full stack web and XState freelance consultant
 - <mdi-github /> [Devessier](https://github.com/Devessier)
 - <mdi-link /> [baptiste.devessier.fr](https://baptiste.devessier.fr)
 - <mdi-twitter /> [BDevessier](https://twitter.com/BDevessier)
