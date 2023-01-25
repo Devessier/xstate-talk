@@ -158,8 +158,26 @@ A world made of state machines.
 
 Thank you Cédric and Loïck for inviting me.
 
+<div class="grid grid-cols-2 gap-12">
+
+<div>
+
 - <mdi-github /> [Devessier](https://github.com/Devessier)
 - <mdi-link /> [baptiste.devessier.fr](https://baptiste.devessier.fr)
 - <mdi-twitter /> [BDevessier](https://twitter.com/BDevessier)
 - Code: https://github.com/Devessier/xstate-talk-demo
-<!-- - Slides: [temporal-electronic-signature-talk.netlify.app](https://temporal-electronic-signature-talk.netlify.app/1) -->
+- Slides: https://xstate-talk.netlify.app
+
+</div>
+
+<div class="w-52">
+
+Link to GitHub repo 👇
+
+![](/qr-code.png)
+
+</div>
+
+</div>
+
+
