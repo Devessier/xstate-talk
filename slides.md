@@ -26,7 +26,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 <a href="https://xstate-talk-todo-app.netlify.app" target="_blank">
 
-![](/Screenshot%202023-01-23%20at%2011-05-42%20https%20__xstate-talk-todo-app.netlify.app.png)
+![](/Demo.png)
 
 </a>
 
@@ -73,7 +73,7 @@ A world made of state machines.
 
 <a href="https://stately.ai/registry/editor/6fa98cfb-fe39-4479-a6a6-2db09dc872d1?machineId=d530e75e-35d7-4e78-a67f-56f6b64b6eab" target="_blank">
 
-![](/CleanShot%202023-01-22%20at%2016.33.05%402x.png)
+![](/Machine.png)
 
 </a>
 
